@@ -60,7 +60,7 @@ class Flight
 
     function save()
     {
-        $GLOBALS['DB']->exec("INSERT INTO flights (departure_time, departure_city, arrival_city, flight_status) VALUES ({$this->departure_time}, '{$this->departure_city}', '{$this->arrival_city}', '{$this->flight_status}');");
+        $GLOBALS['DB']->exec("INSERT INTO flights (departure_time, departure_city, arrival_city, flight_status) VALUES ('{$this->departure_time}', '{$this->departure_city}', '{$this->arrival_city}', '{$this->flight_status}');");
         $this->id = $GLOBALS['DB']->lastInsertId();
     }
 
@@ -69,6 +69,7 @@ class Flight
         $flights = array();
         $returned_flights = $GLOBALS['DB']->query("SELECT * FROM flights;");
         foreach ($returned_flights as $flight) {
+            $id = $flight['id'];
             $departure_time = $flight['departure_time'];
             $departure_city = $flight['departure_city'];
             $arrival_city = $flight['arrival_city'];
