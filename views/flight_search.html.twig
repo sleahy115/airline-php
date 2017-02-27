@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Flight planner </title>
+    </head>
+    <body>
+        <div class="container">
+            <h2>Enter flight information</h2>
+            <form action="/" method="post">
+                <label for="departure_time">Enter departure time</label>
+                <input type="time" name="departure_time">
+                <label for="departure_city">Enter departure city</label>
+                <input type="text" name="departure_city">
+                <label for="arrival_city">Enter destination</label>
+                <input type="text" name="arrival_city">
+                <label for="flight_status">Enter Flight Status</label>
+                <select name="flight_status">
+                    <option value="on_time">On time</option>
+                    <option value="delayed">Delayed</option>
+                    <option value="cancelled">Cancelled</option>
+                    <option value="complete">Complete</option>
+                </select>
+                <button type="submit">Save</button>
+            </form>
+        </div>
+
+        {% if flights is not empty %}
+
+        {% for flight in flights %}
+        <li>{{flight.getDepartureCity}}</li>
+        <li>{{flight.getArrivalCity}}</li>
+        {% endfor %}
+        <a href="/delete"><button>Delete All</button></a>
+        {% endif %}
+    </body>
+</html>

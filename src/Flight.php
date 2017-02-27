@@ -105,5 +105,23 @@ class Flight
         $this->setFlightStatus($new_status);
     }
 
+    function updateArrivalCity($new_city)
+    {
+        $GLOBALS['DB']->exec("UPDATE flights SET arrival_city = '{$new_city}' WHERE id = {$this->getId()};");
+        $this->setArrivalCity($new_city);
+    }
+
+    function updateDepartureCity($new_city)
+    {
+        $GLOBALS['DB']->exec("UPDATE flights SET departure_city = '{$new_city}' WHERE id = {$this->getId()};");
+        $this->setDepartureCity($new_city);
+    }
+
+    function updateDepartureTime($new_time)
+    {
+        $GLOBALS['DB']->exec("UPDATE flights SET departure_time = '{$new_time}' WHERE id = {$this->getId()};");
+        $this->setDepartureTime($new_time);
+    }
+
 }
  ?>
