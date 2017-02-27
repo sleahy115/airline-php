@@ -113,6 +113,22 @@ class Flight
         $GLOBALS['DB']->exec("DELETE FROM flights WHERE id = '{$this->getId()}';");
     }
 
+    static function findByDepartureCity($departure_city)
+    {
+        $flights = array();
+        $found_flights = $GLOBALS['DB']->query("SELECT * FROM flights WHERE departure_city = '{$departure_city}';");
+        foreach ($found_flights as $flight) {
+            $id = $flight['id'];
+            $departure_time = $flight['departure_time'];
+            $departure_city = $flight['departure_city'];
+            $arrival_city = $flight['arrival_city'];
+            $flight_status = $flight['flight_status'];
+            $new_flight = new Flight($id,$departure_time, $departure_city, $arrival_city, $flight_status);
+            array_push($flights, $new_flight);
+        }
+        return $flights;
+    }
+
 
 }
  ?>

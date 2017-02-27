@@ -42,5 +42,13 @@
         <a href="/delete"><button>Delete All</button></a>
         {% endif %}
         {% endblock %}
+
+        <h2>Search flights by departure city</h2>
+        <form action="/flight_list" method="post">
+            <label for="departure_city_search">Enter departure city</label>
+            <input type="text" name="departure_city_search">
+            <button type="submit" name="button">Search</button>
+        </form>
+
     </body>
 </html>

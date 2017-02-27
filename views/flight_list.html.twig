@@ -1,0 +1,11 @@
+{% extends "flight_search.html.twig" %}
+
+{% block body %}
+
+{% for flight in flights %}
+<li>{{flight.getDepartureCity}}</li>
+<li>{{flight.getArrivalCity}}</li>
+<li>{{flight.getDepartureTime}}</li>
+<li>{{flight.getFlightStatus}}</li>
+{% endfor %}
+{% endblock %}
