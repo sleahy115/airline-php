@@ -41,7 +41,6 @@
         {% endfor %}
         <a href="/delete"><button>Delete All</button></a>
         {% endif %}
-        {% endblock %}
 
         <h2>Search flights by departure city</h2>
         <form action="/flight_list" method="post">
@@ -49,6 +48,10 @@
             <input type="text" name="departure_city_search">
             <button type="submit" name="button">Search</button>
         </form>
+
+        <a href="/city_list">Enter a new city to route</a>
+
+        {% endblock %}
 
     </body>
 </html>

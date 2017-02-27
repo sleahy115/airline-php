@@ -19,9 +19,13 @@ use Symfony\Component\HttpFoundation\Request;
 Request::enableHttpMethodParameterOverride();
 
 $app->get("/", function() use ($app) {
-    return $app['twig']->render('flight_search.html.twig', array( 'flights'=>Flight::getAll()));
+    return $app['twig']->render('flight_search.html.twig', array( 'flights'=>Flight::getAll(),));
 });
-$app->post("/", function() use ($app) {
+$app->get("/city_list", function() use ($app) {
+    return $app['twig']->render('city_list.html.twig', array( 'cities'=>City::getAll(),));
+});
+
+$app->post("/city_list", function() use ($app) {
     $departure_time = $_POST["departure_time"];
     $departure_city = $_POST["departure_city"];
     $arrival_city = $_POST["arrival_city"];
@@ -30,10 +34,19 @@ $app->post("/", function() use ($app) {
     $new_flight->save();
     return $app['twig']->render('flight_search.html.twig', array('flights'=>Flight::getAll()));
 });
+
+$app->post("/", function() use ($app) {
+    $city_name = $_POST['city_name'];
+    $new_city = new City($id= null, $city_name);
+    $new_city->save();
+    return $app['twig']->render('city_list.html.twig', array( 'cities'=>City::getAll(),));
+});
+
 $app->get("/delete", function() use ($app) {
     Flight::deleteAll();
     return $app['twig']->render('flight_search.html.twig', array('flights'=>Flight::getAll()));
 });
+
 $app->get("/update/{id}", function($id) use ($app) {
     $flight = Flight::find($id);
     return $app['twig']->render('update_flight.html.twig', array('flight'=>$flight));
@@ -55,8 +68,6 @@ $app->post("/flight_list", function() use ($app) {
     $flights = Flight::findByDepartureCity($_POST["departure_city_search"]);
     return $app['twig']->render('flight_list.html.twig', array('flights'=>$flights));
 });
-
-
 
 return $app;
 

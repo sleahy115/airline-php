@@ -1,0 +1,18 @@
+{% extends "flight_search.html.twig" %}
+{% block body %}
+
+<h2>Add a city to service route</h2>
+<form action="/" method="post">
+    <label for="city_name">Enter a city name</label>
+    <input type="text" name="city_name">
+    <button type="submit">Add</button>
+</form>
+
+{% if cities is not empty%}
+
+{% for city in cities %}
+
+<li>{{city.getName}}</li>
+{% endfor %}
+{% endif %}
+{% endblock %}
