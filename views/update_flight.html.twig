@@ -1,0 +1,25 @@
+{% extends "flight_search.html.twig" %}
+
+{% block body %}
+<div class="container">
+    <h2>Enter flight information</h2>
+    <form action="/update/{{flight.getId}}" method="post">
+        <input type="hidden" name="_method" value="patch">
+        <label for="departure_time">Enter departure time</label>
+        <input type="time" name="departure_time" value="{{flight.getDepartureTime}}">
+        <label for="departure_city">Enter departure city</label>
+        <input type="text" name="departure_city" value="{{flight.getDepartureCity}}">
+        <label for="arrival_city">Enter destination</label>
+        <input type="text" name="arrival_city" value="{{flight.getArrivalCity}}">
+        <label for="flight_status">Enter Flight Status</label>
+        <select name="flight_status" value="{{flight.getFlightStatus}}">
+            <option value="on_time">On time</option>
+            <option value="delayed">Delayed</option>
+            <option value="cancelled">Cancelled</option>
+            <option value="complete">Complete</option>
+        </select>
+        <button type="submit">Update</button>
+    </form>
+</div>
+
+{% endblock %}

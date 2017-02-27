@@ -99,29 +99,15 @@ class Flight
         }
     }
 
-    function updateStatus($new_status)
+    function update($new_time, $new_departure_city, $new_arrival_city, $new_status)
     {
-        $GLOBALS['DB']->exec("UPDATE flights SET flight_status = '{$new_status}' WHERE id = {$this->getId()};");
+        $GLOBALS['DB']->exec("UPDATE flights SET arrival_city = '{$new_arrival_city}', departure_city = '{$new_departure_city}', departure_time = '{$new_time}', flight_status ='{$new_status}' WHERE id = {$this->getId()};");
+        $this->setArrivalCity($new_arrival_city);
+        $this->setDepartureCity($new_departure_city);
+        $this->setDepartureTime($new_time);
         $this->setFlightStatus($new_status);
     }
 
-    function updateArrivalCity($new_city)
-    {
-        $GLOBALS['DB']->exec("UPDATE flights SET arrival_city = '{$new_city}' WHERE id = {$this->getId()};");
-        $this->setArrivalCity($new_city);
-    }
-
-    function updateDepartureCity($new_city)
-    {
-        $GLOBALS['DB']->exec("UPDATE flights SET departure_city = '{$new_city}' WHERE id = {$this->getId()};");
-        $this->setDepartureCity($new_city);
-    }
-
-    function updateDepartureTime($new_time)
-    {
-        $GLOBALS['DB']->exec("UPDATE flights SET departure_time = '{$new_time}' WHERE id = {$this->getId()};");
-        $this->setDepartureTime($new_time);
-    }
 
 }
  ?>

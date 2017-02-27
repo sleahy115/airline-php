@@ -15,6 +15,9 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views'
 ));
 
+use Symfony\Component\HttpFoundation\Request;
+Request::enableHttpMethodParameterOverride();
+
 $app->get("/", function() use ($app) {
     return $app['twig']->render('flight_search.html.twig', array( 'flights'=>Flight::getAll()));
 });
@@ -31,6 +34,17 @@ $app->get("/delete", function() use ($app) {
     Flight::deleteAll();
     return $app['twig']->render('flight_search.html.twig', array('flights'=>Flight::getAll()));
 });
+$app->get("/update/{id}", function($id) use ($app) {
+    $flight = Flight::find($id);
+    return $app['twig']->render('update_flight.html.twig', array('flight'=>$flight));
+});
+
+$app->patch("/update/{id}", function($id) use ($app) {
+    $flight = Flight::find($id);
+    $flight->update($_POST['departure_time'], $_POST['departure_city'], $_POST['arrival_city'], $_POST['flight_status']);
+    return $app->redirect("/");
+});
+
 
 return $app;
 

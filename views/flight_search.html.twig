@@ -5,6 +5,7 @@
         <title>Flight planner </title>
     </head>
     <body>
+        {% block body %}
         <div class="container">
             <h2>Enter flight information</h2>
             <form action="/" method="post">
@@ -30,8 +31,12 @@
         {% for flight in flights %}
         <li>{{flight.getDepartureCity}}</li>
         <li>{{flight.getArrivalCity}}</li>
+        <li>{{flight.getDepartureTime}}</li>
+        <li>{{flight.getFlightStatus}}</li>
+        <a href="/update/{{flight.getId}}"><button type="button">Update this flight</button></a>
         {% endfor %}
         <a href="/delete"><button>Delete All</button></a>
         {% endif %}
+        {% endblock %}
     </body>
 </html>
