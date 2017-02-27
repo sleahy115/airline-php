@@ -108,6 +108,11 @@ class Flight
         $this->setFlightStatus($new_status);
     }
 
+    function delete()
+    {
+        $GLOBALS['DB']->exec("DELETE FROM flights WHERE id = '{$this->getId()}';");
+    }
+
 
 }
  ?>
