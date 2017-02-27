@@ -89,7 +89,7 @@ class Flight
     {
         $found_flight = null;
         $flights = Flight::getAll();
-        foreach(flights as $flight)
+        foreach($flights as $flight)
         {
             $flight_id = $flight->getId();
             if ($flight_id == $search_id){
@@ -97,6 +97,12 @@ class Flight
             }
             return $found_flight;
         }
+    }
+
+    function updateStatus($new_status)
+    {
+        $GLOBALS['DB']->exec("UPDATE flights SET flight_status = '{$new_status}' WHERE id = {$this->getId()};");
+        $this->setFlightStatus($new_status);
     }
 
 }

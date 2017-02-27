@@ -39,39 +39,54 @@ class FlightTest extends PHPUnit_Framework_TestCase
         $new_flight2->save();
 
         $result = Flight::getAll();
-        var_dump("results");
-        var_dump($result);
-        var_dump("expected");
-        var_dump([$new_flight, $new_flight2]);
-
 
         $this->assertEquals($result,[$new_flight, $new_flight2]);
     }
 
-    // function test_find()
-    // {
-    //     $city_name = "Portland";
-    //     $id = 1;
-    //     $new_city = new City($id, $city_name);
-    //     $new_city->save();
-    //     // $id = $new_city->getId();
-    //
-    //     $result = City::find($new_city->getId());
-    //
-    //     $this->assertEquals($result, $new_city);
-    // }
-    //
-    // function testGetId()
-    //     {
-    //         //Arrange
-    //         $name = "PDX";
-    //         $id = 1;
-    //         $test_category = new City($id, $name);
-    //         // $test_category->save();
-    //         //Act
-    //         $result = $test_category->getId();
-    //         //Assert
-    //         $this->assertEquals(1, $result);
-    //     }
+    function test_find()
+    {
+        $id = 1;
+        $departure_time = "16:00:00";
+        $departure_city = "Portland";
+        $arrival_city = "Denver";
+        $flight_status = "delayed";
+        $new_flight2 = new Flight($id,$departure_time, $departure_city, $arrival_city, $flight_status);
+        $new_flight2->save();
+
+        $result = Flight::find($new_flight2->getId());
+
+        $this->assertEquals($result, $new_flight2);
+    }
+
+    function testGetId()
+        {
+            //Arrange
+            $id = 1;
+            $departure_time = "16:00:00";
+            $departure_city = "Portland";
+            $arrival_city = "Denver";
+            $flight_status = "delayed";
+            $new_flight2 = new Flight($id,$departure_time, $departure_city, $arrival_city, $flight_status);
+            //Act
+            $result = $new_flight2->getId();
+            //Assert
+            $this->assertEquals(1, $result);
+        }
+    function testUpdateStatus()
+    {
+        //Arrange
+        $id = null;
+        $departure_time = "16:00:00";
+        $departure_city = "Boulder";
+        $arrival_city = "Maui";
+        $flight_status = "delayed";
+        $new_status = "on time";
+        $new_flight2 = new Flight($id,$departure_time, $departure_city, $arrival_city, $flight_status);
+        $new_flight2->save();
+
+        $new_flight2->updateStatus($new_status);
+
+        $this->assertEquals($new_flight2->getFlightStatus(), $new_status);
+    }
 }
  ?>
