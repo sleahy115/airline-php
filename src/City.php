@@ -53,14 +53,28 @@
         {
             $found_city = null;
             $cities = City::getAll();
+            var_dump("find:");
+            var_dump($cities);
             foreach($cities as $city)
             {
                 $city_id = $city->getId();
                 if ($city_id == $search_id){
                     $found_city = $city;
                 }
-                return $found_city;
             }
+            return $found_city;
+        }
+ 
+
+        function update($new_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE cities SET city_name = '{$new_name}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
+        }
+
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM cities WHERE id = '{$this->getId()}';");
         }
 
     }

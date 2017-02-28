@@ -1,0 +1,11 @@
+{% extends "flight_search.html.twig" %}
+{% block body %}
+
+<h2>update {{city.getName}}</h2>
+<form action="/update/city/{{city.getId}}" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <label for="city_name">Enter a city name</label>
+    <input type="text" name="city_name">
+    <button type="submit">Update</button>
+</form>
+ {% endblock %}

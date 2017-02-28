@@ -7,12 +7,18 @@
     <body>
         {% block body %}
         <div class="container">
+            {% if cities is empty %}
+            <a href="/city_list">Enter a new city to route</a>
+            {% else %}
             <h2>Enter flight information</h2>
             <form action="/" method="post">
                 <label for="departure_time">Enter departure time</label>
                 <input type="time" name="departure_time">
-                <label for="departure_city">Enter departure city</label>
-                <input type="text" name="departure_city">
+                <select name="departure_city">
+                    {% for city in cities%}
+                    <option value="{{city.getName}}">{{city.getName}}</option>
+                    {% endfor %}
+                </select>
                 <label for="arrival_city">Enter destination</label>
                 <input type="text" name="arrival_city">
                 <label for="flight_status">Enter Flight Status</label>
@@ -24,7 +30,8 @@
                 </select>
                 <button type="submit">Save</button>
             </form>
-        </div>
+            {% endif %}
+
 
         {% if flights is not empty %}
 
@@ -50,6 +57,7 @@
         </form>
 
         <a href="/city_list">Enter a new city to route</a>
+    </div>
 
         {% endblock %}
 

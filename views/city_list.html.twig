@@ -2,17 +2,24 @@
 {% block body %}
 
 <h2>Add a city to service route</h2>
-<form action="/" method="post">
+<form action="/city_list" method="post">
     <label for="city_name">Enter a city name</label>
     <input type="text" name="city_name">
     <button type="submit">Add</button>
 </form>
 
-{% if cities is not empty%}
+{% if cities is not empty %}
 
 {% for city in cities %}
 
 <li>{{city.getName}}</li>
+<a href="/update/city/{{city.getId}}"><button type="button">Update this City</button></a>
+<form action="/delete/city/{{city.getId}}" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <button type="submit">delete this City</button>
+</form>
 {% endfor %}
 {% endif %}
+<a href="/delete"><button>Delete All</button></a>
+<a href="/"><button type="button">Home</button></a>
 {% endblock %}
