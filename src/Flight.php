@@ -67,7 +67,7 @@ class Flight
     static function getAll()
     {
         $flights = array();
-        $returned_flights = $GLOBALS['DB']->query("SELECT * FROM flights;");
+        $returned_flights = $GLOBALS['DB']->query("SELECT * FROM flights ORDER BY departure_TIME DESC, departure_city ASC;");
         foreach ($returned_flights as $flight) {
             $id = $flight['id'];
             $departure_time = $flight['departure_time'];

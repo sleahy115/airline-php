@@ -53,8 +53,6 @@
         {
             $found_city = null;
             $cities = City::getAll();
-            var_dump("find:");
-            var_dump($cities);
             foreach($cities as $city)
             {
                 $city_id = $city->getId();
@@ -64,7 +62,7 @@
             }
             return $found_city;
         }
- 
+
 
         function update($new_name)
         {
